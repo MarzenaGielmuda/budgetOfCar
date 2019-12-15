@@ -15,10 +15,10 @@ import java.util.List;
 public class EmpController {
 
     public EmpController() {
-        addToList(new Emp( "Janek", 120000, "Radom","m.gielmuda@wp.pl"));
-        addToList(new Emp("Zosia", 9000, "Makowiec", "m.gielmuda@wp.pl"));
-        addToList(new Emp("Marek", 10000, "Warszawa","m.gielmuda@wp.pl"));
-        addToList(new Emp("Krysytna", 13000, "Ryzowice","m.gielmuda@wp.pl"));
+        addToList(new Emp( "Janek", 120000, "Radom"));
+        addToList(new Emp("Zosia", 9000, "Makowiec"));
+        addToList(new Emp("Marek", 10000, "Warszawa"));
+        addToList(new Emp("Krysytna", 13000, "Ryzowice"));
     }
 
     List<Emp> list = new ArrayList<>();
@@ -55,7 +55,7 @@ public class EmpController {
             emp1.setName(emp.getName());
             emp1.setDesignation(emp.getDesignation());
             emp1.setSalary(emp.getSalary());
-            emp1.setEmail(emp.getEmail());
+
           //  SendEmailEmp.sendEmail(emp.getEmail());
 
         }

@@ -1,11 +1,13 @@
 package spring.employees;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
-import java.util.Objects;
-@NonNull
 @Data
+@AllArgsConstructor
+@RequiredArgsConstructor
 public class Emp {
     private int id;
     @NonNull
@@ -14,8 +16,6 @@ public class Emp {
     private float salary;
     @NonNull
     private String designation;
-    @NonNull
-    private String email;
 
     public Emp() {}
 
