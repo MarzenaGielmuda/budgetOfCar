@@ -56,7 +56,7 @@ public class EmpController {
             emp1.setDesignation(emp.getDesignation());
             emp1.setSalary(emp.getSalary());
             emp1.setEmail(emp.getEmail());
-            SendEmailEmp.sendEmail(emp.getEmail());
+          //  SendEmailEmp.sendEmail(emp.getEmail());
 
         }
 
