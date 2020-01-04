@@ -38,6 +38,28 @@ public class PostgreSQLService  {
 
 
 
+    public void removeService(long id) {
+
+        final  String sqlSelectService = "DELETE FROM service WHERE  id= ?;";
+
+        Connection connection = initializeDataBaseConnection();
+        PreparedStatement preparedStatement = null;
+
+        try {
+            preparedStatement = connection.prepareStatement(sqlSelectService);
+            preparedStatement.setLong(1,id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("Error during invoke SQL query :\n" + e.getMessage());
+            throw new RuntimeException("Error during invoke SQL query");
+        }finally {
+            closeDataBaseResources(connection, preparedStatement);
+        }
+
+    }
+
+
+
 
     public List<Service> getAllServices() {
 
@@ -128,44 +150,7 @@ public class PostgreSQLService  {
         return Integer.parseInt(sqlInsertService);
     }
 
-//    @Override
-//    public List<Book> getAllBooks() {
-//
-//
-//        final  String sqlSelectAllBooks = "SELECT * FROM books;";
-//
-//        Connection connection = initializeDataBaseConnection();
-//        Statement statement = null;
-//        List<Book> books = new ArrayList<>();
-//
-//        try {
-//            statement = connection.createStatement();
-//            ResultSet resultSet = statement.executeQuery(sqlSelectAllBooks);
-//
-//            while (resultSet.next()){
-//                Book book = new Book();
-//                book.setId(resultSet.getInt(ID));
-//                book.setTitle(resultSet.getString(TITLE));
-//                book.setAuthor(resultSet.getString(AUTHOR));
-//                book.setPagesSum(resultSet.getInt(PAGE_SUM));
-//                book.setYearOfPublished(resultSet.getInt(YEAR_OF_PUBLISHED));
-//                book.setPublishingHouse(resultSet.getString(PUBLISHING_HOUSE));
-//
-//                books.add(book);
-//            }
-//        } catch (SQLException e) {
-//
-//            System.err.println("Error during invoke SQL query: \n" + e.getMessage());
-//            throw new  RuntimeException("Error during invoke SQL query");
-//        }
-//        finally {
-//            closeDataBaseResources(connection,statement);
-//        }
-//        return  books;
-//    }
 
-
-//    book_id, title, author,pages_sum,year_of_published,publishing_house
     private Connection initializeDataBaseConnection(){
 
         try {
@@ -229,39 +214,7 @@ public class PostgreSQLService  {
 //    }
 //
 //
-//
-//
-//        @Override
-//    public void addBook(Book book) {
-//
-//        final String sqlInsertBook = "INSERT INTO books (book_id, title, author,pages_sum,year_of_published,publishing_house)" +
-//                "VALUES" +
-//                "   (?,?, ?, ?, ?,?);";
-//        Connection connection = initializeDataBaseConnection();
-//        PreparedStatement preparedStatement = null;
-//
-//
-//            try {
-//                preparedStatement = connection.prepareStatement(sqlInsertBook);
-//
-//                preparedStatement.setLong(1,book.getId());
-//                preparedStatement.setString(2,book.getTitle());
-//                preparedStatement.setString(3,book.getAuthor());
-//                preparedStatement.setInt(4,book.getPagesSum());
-//                preparedStatement.setInt(5,book.getYearOfPublished());
-//                preparedStatement.setString(6,book.getPublishingHouse());
-//
-//                preparedStatement.executeUpdate();
-//
-//
-//            } catch (SQLException e) {
-//                System.err.println("Error during invoke SQL query :\n" + e.getMessage());
-//                throw new RuntimeException("Error during invoke SQL query");
-//            }finally {
-//                closeDataBaseResources(connection, preparedStatement);
-//            }
-//
-//        }
+
 //
 //    @Override
 //    public void removeBook(long bookIdToDelete) {
