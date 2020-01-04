@@ -9,12 +9,20 @@
 <div class="container">
     <h2>Employee Form</h2>
     <div>
+
+<!--        this.id = id;-->
+<!--        this.title = title;-->
+<!--        this.author = author;-->
+<!--        this.pagesSum = pagesSum;-->
+<!--        this.yearOfPublished = yearOfPublished;-->
+<!--        this.publishingHouse = publishingHouse;-->
+
         <form action="#" th:action="@{/save_emp}" th:object="${emp}" method="post">
             <input type="text" th:field="*{name}" placeholder="First Name"><br>
             <input type="hidden" th:field="*{id}" placeholder="id"><br>
-            <input type="hidden" th:field="*{email}" placeholder="email"><br>
             <input type="text" th:field="*{designation}" placeholder="designation"><br>
             <input type="text" th:field="*{salary}" placeholder="Salary"><br>
+            <!--            <input type="hidden" th:field="*{email}" placeholder="email"><br>-->
             <input type="submit" th:value="Save">
         </form>
         <hr>

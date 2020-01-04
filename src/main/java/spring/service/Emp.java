@@ -1,4 +1,4 @@
-package spring.employees;
+package spring.service;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

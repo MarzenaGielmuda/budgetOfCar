@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:form="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>All Employees List</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body bgcolor="#99CC66">
+
+<div class="container">
+
+    <div class="row">
+        <div id="title">
+            <h1>Book List</h1>
+        </div>
+        <table>
+            <thead>
+            <tr>
+
+<!--                this.id = id;-->
+<!--                this.title = title;-->
+<!--                this.author = author;-->
+<!--                this.pagesSum = pagesSum;-->
+<!--                this.yearOfPublished = yearOfPublished;-->
+<!--                this.publishingHouse = publishingHouse;-->
+
+                <th>id</th>
+                <th>title</th>
+                <th>author</th>
+                <th>pagesSum</th>
+                <th>yearOfPublished</th>
+                <th>publishingHouse</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-th-each="book : ${list}">
+                <td th:text="${book.id}"></td>
+                <td th:text="${book.title}"></td>
+                <td th:text="${book.author}"></td>
+                <td th:text="${book.pagesSum}"></td>
+                <td th:text="${book.yearOfPublished}"></td>
+                <td th:text="${book.publishingHouse}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <div>
+            <form action="#" th:action="@{/book}"  method="post">
+                <input type="submit" >
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
