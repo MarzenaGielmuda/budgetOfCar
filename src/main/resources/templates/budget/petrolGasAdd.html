@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>ADD OTHER EXPENSES</title>
+</head>
+<body bgcolor=#6b8e23>
+<hr>
+<div class="container">
+    <div style="text-align: center;"/>
+    <h2>ADD PETROL/GAS EXPENSES</h2>
+    <div>
+
+        <form action="#" th:action="@{/add_petrolGas}" th:object="${petrolGas}" method="post">
+
+            <input type="hidden" th:field="*{id}" placeholder="id"><br>
+            <input type="text" th:field="*{value}" placeholder="value"><br>
+            <input type="text" th:field="*{description}" placeholder="description"><br>
+            <!--            <input type="hidden" th:field="*{email}" placeholder="email"><br>-->
+            <input type="submit" th:value="Save">
+        </form>
+        <hr>
+    </div>
+</div>
+
+</body>
+</html>

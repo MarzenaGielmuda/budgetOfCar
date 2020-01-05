@@ -34,36 +34,6 @@ public class Database {
 
 
 
-//
-
-//
-//        while (resultSet.next()){
-//            i++;
-//            System.out.println("Kursor aktualnie jest na "+ i + " wierszu.");
-//        }
-
-//        @@@@@@@@@@@@@@@@@@@@@@@@@@@ SELECT
-
-
-//        ResultSet resultSet = statement.executeQuery("SELECT * FROM books LIMIT 5");
-//
-//        while (resultSet.next()){
-//
-//           int bookId = resultSet.getInt(1);
-//           String title = resultSet.getString(2);//w drugiej kolumnie jest string więc getString - analogicznie w innych wg rodzaju
-//           String author = resultSet.getString("author");
-//
-//
-//            System.out.println(bookId + " " + title + " " + author);
-//        }
-
-//        /        @@@@@@@@@@@@@@@@@@@@@@@@@@@ SELECT
-
-
-
-
-
-
         statement.close();
         connection.close();
 
@@ -71,10 +41,5 @@ public class Database {
 
     }
 
-//    boolean resultFlag = statement.execute("INSERT INTO books (book_id, title, author,pages_sum,year_of_published,publishing_house) VALUES (6,'Ogniem i mieczem w wodzie', 'Jan Nowak', 352, 2009, 'W&S');");
-//        if (!resultFlag){
-//        System.out.println("Ilość dodanych rekordów : " + statement.getUpdateCount());
-//
-////    }
 
 }

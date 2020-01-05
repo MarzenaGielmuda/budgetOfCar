@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:form="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>All OTHER LIST</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<style>
+    table{
+        border: 1px solid black;
+        margin-left:auto;
+        margin-right:auto;
+    }
+</style>
+<body bgcolor=#ffa07a>
+
+<div class="container">
+
+    <div class="row">
+        <div id="title">
+            <div style="text-align: center;"/>
+            <h1>PARTS EXPENSES LIST</h1>
+        </div>
+        <div style="text-align: center;"/>
+        <table>
+            <thead>
+            <tr>
+
+                <th>id</th>
+                <th>value</th>
+                <!--                <th>date</th>-->
+                <th>description</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-th-each="parts : ${list}">
+                <td th:text="${parts.id}"></td>
+                <td th:text="${parts.value}"></td>
+                <!--                <td th:text="${service.date}"></td>-->
+                <td th:text="${parts.description}"></td>
+                <td>
+                    <form  th:action="@{/delete_parts}">
+                        <input type="hidden" th:name="id" th:value="${parts.id}"/>
+                        <input type="submit" th:value="Delete"/>
+                    </form>
+                </td>
+                <td>
+                    <form action="#" th:action="@{/edit_parts}">
+                        <input type="hidden" th:name="id" th:value="${parts.id}"/>
+                        <input type="submit" th:value="Edit" />
+                    </form></td>
+            </tr>
+            </tbody>
+
+        </table>
+        <div>
+            <form action="#" th:action="@{/partsGetAll}" >
+                <input type="submit" th:value="Refresh">
+            </form>
+        </div>
+
+    </div>
+</div>
+</div>
+</body>
+</html>
