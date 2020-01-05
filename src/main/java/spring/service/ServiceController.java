@@ -13,6 +13,8 @@ import java.util.List;
 
 import spring.type.Service;
 
+import static java.lang.Long.getLong;
+import static java.lang.Long.parseLong;
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 
 @Controller
@@ -70,11 +72,11 @@ public class ServiceController {
         if (service.getId() < 1) {
             System.out.println("is add");
 
-            if ( listService.size()<1) {
-                service.setId(listService.size() + 2);
-            }else{
-                service.setId(listService.size() + 1);
-            }
+//            if ( listService.size()<1) {
+//                service.setId(listService.size() + 2);
+//            }else{
+//                service.setId(listService.size() + 1);
+//            }
             postgresServiceStorage.addService(service);
 
         } else {
@@ -94,6 +96,20 @@ public class ServiceController {
 //
         return new ModelAndView("budget/serviceAdd", "service", new Service());
     }
+
+
+
+//    /delete_service
+
+    @RequestMapping(value = "/delete_service")
+    public ModelAndView delete(@RequestParam(value = "id") String id ) {
+
+        long param= parseLong(id);
+        postgresServiceStorage.removeService(param);
+
+        return new ModelAndView("redirect:/serviceGetAll");
+    }
+
 
 
 //    @RequestMapping(value = "/save_emp")
