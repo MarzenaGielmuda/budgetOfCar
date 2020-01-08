@@ -6,10 +6,22 @@
 </head>
 <style>
     .button {
-        background-color: #4CAF50; /* Green */
+        background-color: yellow; /* Green */
         border: none;
-        color: grey;
-        padding: 30px 60px;
+        color: black;
+        padding: 5px 15px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 20px;
+        text-align: center;
+
+    }
+    .button1 {
+        background-color: red;
+        border: none;
+        color: black;
+        padding: 5px 15px;
         text-align: center;
         text-decoration: none;
         display: inline-block;
@@ -20,7 +32,7 @@
 
     h2.ridge {border-style: ridge;
         border-width: medium;
-        border-color: aliceblue;
+        border-color: red;
         border-radius: 5px;
         padding-top: 50px;
         padding-right: 50px;
@@ -39,10 +51,11 @@
 
 
 
-    <button><a href="/serviceIndex" >BUDGET OF SERVICE</a></button>
-    <button><a href="/petrolGasIndex">BUDGET OF PETROL/GAS</a></button>
-    <button><a href="/partsIndex">BUDGET OF PARTS</a></button>
-    <button><a href="/otherIndex">OTHER BUDGET</a></button>
+    <button><a class="button" href="/serviceIndex" >BUDGET OF SERVICE</a></button>
+    <button><a class="button" href="/petrolGasIndex">BUDGET OF PETROL/GAS</a></button>
+    <button><a class="button" href="/partsIndex">BUDGET OF PARTS</a></button>
+    <button><a class="button" href="/otherIndex">OTHER BUDGET</a></button>
+<!--    <button><a class="button1" href="/totalBudget">TOTAL BUDGET</a></button>-->
 </div>
 </div>
 </body>
