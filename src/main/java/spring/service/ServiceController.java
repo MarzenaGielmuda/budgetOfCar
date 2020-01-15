@@ -10,10 +10,7 @@ import spring.postgres.PostgreSQLService;
 import java.util.ArrayList;
 import java.util.List;
 
-import spring.type.Other;
-import spring.type.Parts;
-import spring.type.PetrolGas;
-import spring.type.Service;
+import spring.type.*;
 
 import static java.lang.Long.parseLong;
 
@@ -24,11 +21,13 @@ public class ServiceController {
 
 
     List<Service> listService = new ArrayList<>();
+
     List<Other> listOther = new ArrayList<>();
     List<Parts> listParts = new ArrayList<>();
     List<PetrolGas> listPetrolGas = new ArrayList<>();
 
     PostgreSQLService postgresServiceStorage = new PostgreSQLService();
+
 
     @RequestMapping("/")
     public String indexGet() {
@@ -43,10 +42,35 @@ public class ServiceController {
         return new ModelAndView("budget/serviceIndex");
     }
 
+
+    @RequestMapping("/totalBudget")
+    public ModelAndView totalBudget(Model model) {
+        ModelAndView modelAndView = new ModelAndView();
+
+        listService = postgresServiceStorage.getAllServices();
+        listOther = postgresServiceStorage.getAllOther();
+        listParts = postgresServiceStorage.getAllParts();
+        listPetrolGas = postgresServiceStorage.getAllPetrolGas();
+
+
+        modelAndView.addObject("listOther", listOther);
+        modelAndView.addObject("listParts", listParts);
+        modelAndView.addObject("listParts", listPetrolGas);
+        modelAndView.addObject("listParts", listService);
+        modelAndView.setViewName("budget/totalBudget");
+
+        return  modelAndView;
+    }
+
     @RequestMapping("/otherIndex")
     public ModelAndView otherIndex(Model model) {
 
         return new ModelAndView("budget/otherIndex");
+    }
+    @RequestMapping("/MainIndex")
+    public ModelAndView Mainreturn(Model model) {
+
+        return new ModelAndView("budget/MainIndex");
     }
 
     @RequestMapping("/partsIndex")
@@ -212,6 +236,29 @@ public class ServiceController {
         listParts = postgresServiceStorage.getAllParts();
 
         return new ModelAndView("budget/partsGetAll", "list", listParts);
+    }
+
+
+
+    @RequestMapping("/totalBudget")
+    public ModelAndView totalGetAll(Model model) {
+
+
+        listParts = postgresServiceStorage.getAllParts();
+        listPetrolGas = postgresServiceStorage.getAllPetrolGas();
+        listService = postgresServiceStorage.getAllServices();
+        listOther = postgresServiceStorage.getAllOther();
+
+        List<List> totalList= new ArrayList<>();
+        totalList.add( listService);
+        totalList.add( listParts);
+        totalList.add( listPetrolGas);
+        totalList.add( listOther);
+
+
+//        ModelAndView modelAndView = new ModelAndView("budget/totalBudget", "list",totalList);
+////        return modelAndView;
+        return new ModelAndView("budget/totalBudget", "list", listParts);
     }
 
     @RequestMapping(value = "/add_parts")
