@@ -42,6 +42,11 @@ public class ServiceController {
         return new ModelAndView("budget/serviceIndex");
     }
 
+//    @RequestMapping("/totalBudget")
+//    public ModelAndView totalBudget(Model model) {
+//
+//        return new ModelAndView("budget/totalBudget");
+//    }
 
     @RequestMapping("/totalBudget")
     public ModelAndView totalBudget(Model model) {
@@ -52,11 +57,10 @@ public class ServiceController {
         listParts = postgresServiceStorage.getAllParts();
         listPetrolGas = postgresServiceStorage.getAllPetrolGas();
 
-
-        modelAndView.addObject("listOther", listOther);
         modelAndView.addObject("listParts", listParts);
-        modelAndView.addObject("listParts", listPetrolGas);
-        modelAndView.addObject("listParts", listService);
+        modelAndView.addObject("listService", listService);
+        modelAndView.addObject("listPetrolGas", listPetrolGas);
+        modelAndView.addObject("listOther", listOther);
         modelAndView.setViewName("budget/totalBudget");
 
         return  modelAndView;
@@ -240,26 +244,6 @@ public class ServiceController {
 
 
 
-    @RequestMapping("/totalBudget")
-    public ModelAndView totalGetAll(Model model) {
-
-
-        listParts = postgresServiceStorage.getAllParts();
-        listPetrolGas = postgresServiceStorage.getAllPetrolGas();
-        listService = postgresServiceStorage.getAllServices();
-        listOther = postgresServiceStorage.getAllOther();
-
-        List<List> totalList= new ArrayList<>();
-        totalList.add( listService);
-        totalList.add( listParts);
-        totalList.add( listPetrolGas);
-        totalList.add( listOther);
-
-
-//        ModelAndView modelAndView = new ModelAndView("budget/totalBudget", "list",totalList);
-////        return modelAndView;
-        return new ModelAndView("budget/totalBudget", "list", listParts);
-    }
 
     @RequestMapping(value = "/add_parts")
 

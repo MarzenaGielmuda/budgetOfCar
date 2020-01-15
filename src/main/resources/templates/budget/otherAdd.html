@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <title>ADD OTHER EXPENSES</title>
 </head>
+<style>
+    .button1 {
+        background-color: yellow;
+        color: black;
+    }
+</style>
 <body bgcolor=#e0ffff>
 <hr>
 <div class="container">
@@ -18,6 +24,9 @@
             <input type="text" th:field="*{description}" placeholder="description"><br>
             <!--            <input type="hidden" th:field="*{email}" placeholder="email"><br>-->
             <input type="submit" th:value="Save">
+            <br/>
+            <br/>
+            <button><a class="button1" href="/otherIndex" >RETURN</a></button>
         </form>
         <hr>
     </div>

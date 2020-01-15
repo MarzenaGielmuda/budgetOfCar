@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <title>ADD PARTS EXPENSES</title>
 </head>
+<style>
+    .button1 {
+        background-color: yellow;
+        color: black;
+    }
+</style>
 <body bgcolor=#ffa07a>
 <hr>
 <div class="container">
@@ -11,13 +17,16 @@
     <h2>ADD PARTS EXPENSES</h2>
     <div>
 
-        <form action="#" th:action="@{/add_parts}" th:object="${petrolGas}" method="post">
+        <form action="#" th:action="@{/add_parts}" th:object="${parts}" method="post">
 
             <input type="hidden" th:field="*{id}" placeholder="id"><br>
             <input type="text" th:field="*{value}" placeholder="value"><br>
             <input type="text" th:field="*{description}" placeholder="description"><br>
             <!--            <input type="hidden" th:field="*{email}" placeholder="email"><br>-->
             <input type="submit" th:value="Save">
+            <br/>
+            <br/>
+            <button><a class="button1" href="/partsIndex" >RETURN</a></button>
         </form>
         <hr>
     </div>

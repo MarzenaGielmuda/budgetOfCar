@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:form="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Total Budget List</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<style>
+    table{
+        border: 1px solid black;
+        margin-left:auto;
+        margin-right:auto;
+    }
+</style>
+<body bgcolor=#add8e6>
+
+<div class="container">
+
+    <div class="row">
+        <div id="title">
+            <div style="text-align: center;"/>
+            <h1>TOTAL BUDGET</h1>
+        </div>
+        <div style="text-align: center;"/>
+        <table>
+            <h2>PARTS</h2>
+            <thead>
+            <tr>
+                <th>id</th>
+                <th>value</th>
+                <!--                <th>date</th>-->
+                <th>description</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-th-each="parts: ${listParts}">
+                <td th:text="${parts.id}"></td>
+                <td th:text="${parts.value}"></td>
+                <td th:text="${parts.description}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <br/>
+        <br/>
+        <table>
+            <h2>SERVICE</h2>
+            <thead>
+            <tr>
+                <th>id</th>
+                <th>value</th>
+                <!--                <th>date</th>-->
+                <th>description</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-th-each="service : ${listService}">
+                <td th:text="${service.id}"></td>
+                <td th:text="${service.value}"></td>
+                <td th:text="${service.description}"></td>
+            </tr>
+        </tbody>
+        </table>
+        <br/>
+        <br/>
+        <table>
+            <h2>PETROL/GAS</h2>
+            <thead>
+            <tr>
+                <th>id</th>
+                <th>value</th>
+                <!--                <th>date</th>-->
+                <th>description</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-th-each="petrolGas : ${listPetrolGas}">
+                <td th:text="${petrolGas.id}"></td>
+                <td th:text="${petrolGas.value}"></td>
+                <td th:text="${petrolGas.description}"></td>
+            </tr>
+        </tbody>
+        </table>
+        <br/>
+        <br/>
+        <table>
+            <h2>OTHER</h2>
+            <thead>
+            <tr>
+                <th>id</th>
+                <th>value</th>
+                <!--                <th>date</th>-->
+                <th>description</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr data-th-each="other : ${listOther}">
+                <td th:text="${other.id}"></td>
+                <td th:text="${other.value}"></td>
+                <td th:text="${other.description}"></td>
+            </tr>
+
+            </tbody>
+
+        </table>
+
+<!--        <div>-->
+<!--            <form action="#" th:action="@{/MainIndex}" >-->
+<!--                <input type="submit" th:value="Refresh">-->
+<!--            </form>-->
+<!--        </div>-->
+
+        <br/>
+        <br/>
+        <button><a class="button2"  href="/MainIndex" >RETURN</a></button>
+
+    </div>
+</div>
+</div>
+</body>
+</html>

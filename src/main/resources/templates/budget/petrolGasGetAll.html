@@ -11,6 +11,11 @@
         border: 1px solid black;
         margin-left:auto;
         margin-right:auto;
+        background-color: beige;
+    }
+    .button1 {
+        background-color: red;
+        color: black;
     }
 </style>
 <body bgcolor=#6b8e23>
@@ -55,11 +60,16 @@
             </tbody>
 
         </table>
+        <br/>
         <div>
             <form action="#" th:action="@{/petrolGasGetAll}" >
                 <input type="submit" th:value="Refresh">
             </form>
         </div>
+
+        <br/>
+        <br/>
+        <button><a  class="button1" href="/petrolGasIndex" >RETURN</a></button>
 
     </div>
 </div>

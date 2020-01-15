@@ -174,10 +174,8 @@ public class PostgreSQLService  {
 //        UPDATE Customers
 //        SET ContactName='Alfred Schmidt', City='Frankfurt'
 //        WHERE CustomerID=1;
-        long a = service.getId();
-        final String sqlInsertService = "UPDATE service SET value, description WHERE id="+ a +
-                "VALUES" +
-                "   (?,?);";
+
+        final String sqlInsertService =  "UPDATE service SET value=?, description=? WHERE id=?";
         Connection connection = initializeDataBaseConnection();
         PreparedStatement preparedStatement = null;
 
@@ -188,6 +186,7 @@ public class PostgreSQLService  {
 
             preparedStatement.setDouble(1,service.getValue());
             preparedStatement.setString(2, service.getDescription());
+            preparedStatement.setLong(3, service.getId());
 
             preparedStatement.executeUpdate();
 
@@ -403,10 +402,7 @@ public class PostgreSQLService  {
 //        UPDATE Customers
 //        SET ContactName='Alfred Schmidt', City='Frankfurt'
 //        WHERE CustomerID=1;
-        long a = other.getId();
-        final String sqlInsertService = "UPDATE other SET value, description WHERE id="+ a +
-                "VALUES" +
-                "   (?,?);";
+        final String sqlInsertService =  "UPDATE other SET value=?, description=? WHERE id=?";
         Connection connection = initializeDataBaseConnection();
         PreparedStatement preparedStatement = null;
 
@@ -417,6 +413,7 @@ public class PostgreSQLService  {
 
             preparedStatement.setDouble(1,other.getValue());
             preparedStatement.setString(2, other.getDescription());
+            preparedStatement.setLong(3, other.getId());
 
             preparedStatement.executeUpdate();
 
@@ -589,10 +586,8 @@ public class PostgreSQLService  {
 //        UPDATE Customers
 //        SET ContactName='Alfred Schmidt', City='Frankfurt'
 //        WHERE CustomerID=1;
-        long a = parts.getId();
-        final String sqlInsertService = "UPDATE parts SET value, description WHERE id="+ a +
-                "VALUES" +
-                "   (?,?);";
+        final String sqlInsertService =  "UPDATE parts SET value=?, description=? WHERE id=?";
+
         Connection connection = initializeDataBaseConnection();
         PreparedStatement preparedStatement = null;
 
@@ -603,6 +598,7 @@ public class PostgreSQLService  {
 
             preparedStatement.setDouble(1,parts.getValue());
             preparedStatement.setString(2, parts.getDescription());
+            preparedStatement.setLong(3, parts.getId());
 
             preparedStatement.executeUpdate();
 
@@ -774,10 +770,8 @@ public class PostgreSQLService  {
 //        UPDATE Customers
 //        SET ContactName='Alfred Schmidt', City='Frankfurt'
 //        WHERE CustomerID=1;
-        long a = petrolGas.getId();
-        final String sqlInsertService = "UPDATE petrol SET value, description WHERE id="+ a +
-                "VALUES" +
-                "   (?,?);";
+//        long a = petrolGas.getId();
+        final String sqlInsertService = "UPDATE petrol SET value=?, description=? WHERE id=?";
         Connection connection = initializeDataBaseConnection();
         PreparedStatement preparedStatement = null;
 
@@ -788,6 +782,7 @@ public class PostgreSQLService  {
 
             preparedStatement.setDouble(1,petrolGas.getValue());
             preparedStatement.setString(2, petrolGas.getDescription());
+            preparedStatement.setLong(3,petrolGas.getId());
 
             preparedStatement.executeUpdate();
 
