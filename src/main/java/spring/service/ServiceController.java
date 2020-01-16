@@ -40,7 +40,7 @@ public class ServiceController {
     public ModelAndView serviceIndex(Model model) {
 
         return new ModelAndView("budget/serviceIndex");
-    }
+}
 
 //    @RequestMapping("/totalBudget")
 //    public ModelAndView totalBudget(Model model) {
@@ -98,8 +98,16 @@ public class ServiceController {
 
 
         listService = postgresServiceStorage.getAllServices();
-
-        return new ModelAndView("budget/serviceGetAll", "list", listService);
+        double sum =0;
+        for ( Service service:listService
+             ) {
+            sum = sum+ service.getValue();
+        }
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("list", listService);
+        modelAndView.addObject("sum", sum);
+        modelAndView.setViewName("budget/serviceGetAll");
+        return modelAndView;
     }
 
     @RequestMapping(value = "/add_service")
@@ -173,8 +181,17 @@ public class ServiceController {
 
         listOther = postgresServiceStorage.getAllOther();
 
-        return new ModelAndView("budget/otherGetAll", "list", listOther);
-    }
+        double sum =0;
+        for ( Other other:listOther
+        ) {
+            sum = sum + other.getValue();
+        }
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("list", listOther);
+        modelAndView.addObject("sum", sum);
+        modelAndView.setViewName("budget/otherGetAll");
+        return modelAndView;
+}
 
     @RequestMapping(value = "/add_other")
 
@@ -239,7 +256,17 @@ public class ServiceController {
 
         listParts = postgresServiceStorage.getAllParts();
 
-        return new ModelAndView("budget/partsGetAll", "list", listParts);
+        double sum =0;
+        for ( Parts parts:listParts
+        ) {
+            sum = sum + parts.getValue();
+        }
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("list", listParts);
+        modelAndView.addObject("sum", sum);
+        modelAndView.setViewName("budget/partsGetAll");
+        return modelAndView;
+
     }
 
 
@@ -307,7 +334,17 @@ public class ServiceController {
 
         listPetrolGas = postgresServiceStorage.getAllPetrolGas();
 
-        return new ModelAndView("budget/petrolGasGetAll", "list", listPetrolGas);
+        double sum =0;
+        for ( PetrolGas petrolGas:listPetrolGas
+        ) {
+            sum = sum + petrolGas.getValue();
+        }
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("list", listPetrolGas);
+        modelAndView.addObject("sum", sum);
+        modelAndView.setViewName("budget/petrolGasGetAll");
+        return modelAndView;
+
     }
 
     @RequestMapping(value = "/add_petrolGas")

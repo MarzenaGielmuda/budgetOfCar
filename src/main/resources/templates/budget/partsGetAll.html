@@ -60,6 +60,14 @@
             </tbody>
 
         </table>
+        <table>
+            <tbody>
+            <h5>TOTAL COSTS</h5>
+            <tr data=" ${sum}">
+                <td th:text="${sum}"></td>
+            </tr>
+            </tbody>
+        </table>
         <br/>
         <div>
             <form action="#" th:action="@{/partsGetAll}" >
