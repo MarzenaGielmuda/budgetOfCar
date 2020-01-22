@@ -117,11 +117,7 @@ public class ServiceController {
         if (service.getId() < 1) {
             System.out.println("is add");
 
-//            if ( listService.size()<1) {
-//                service.setId(listService.size() + 2);
-//            }else{
-//                service.setId(listService.size() + 1);
-//            }
+
             postgresServiceStorage.addService(service);
 
         } else {

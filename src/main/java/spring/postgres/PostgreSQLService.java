@@ -1,5 +1,6 @@
 package spring.postgres;
 
+import javafx.scene.input.DataFormat;
 import spring.type.Other;
 import spring.type.Parts;
 import spring.type.PetrolGas;
@@ -17,6 +18,7 @@ public class PostgreSQLService  {
             Class.forName("org.postgresql.Driver");
         }catch (ClassNotFoundException ex){
             System.err.println("Server can't find postgresql Driver class: \n" + ex);
+
         }
     }
 
@@ -29,9 +31,19 @@ public class PostgreSQLService  {
 
     private final String ID_SERVICE = "id";
     private final String VALUE = "value";
-//    private final String  DATE = "date";
+    private final String  DATE = "date";
     private final String DESCRIPTION = "description";
     private final String LastID = "LastID";
+
+    List<Service> servicesList = new ArrayList<>();
+    Service service1 = new Service();
+
+    List<Parts> partsList = new ArrayList<>();
+
+    List<Other> othersList = new ArrayList<>();
+
+
+    List<PetrolGas> petrolGasesList = new ArrayList<>();
 
 
 
@@ -49,6 +61,7 @@ public class PostgreSQLService  {
         } catch (SQLException e) {
             System.err.println("Error during invoke SQL query :\n" + e.getMessage());
             throw new RuntimeException("Error during invoke SQL query");
+
         }finally {
             closeDataBaseResources(connection, preparedStatement);
         }
@@ -90,7 +103,7 @@ public class PostgreSQLService  {
                 service.setId(resultSet.getInt(ID_SERVICE));
                 service.setValue(resultSet.getDouble(VALUE));
 //                service.setData(resultSet.getDate(String.valueOf(date)));
-//                service.setData(resultSet.getDate());
+                service.setDate(resultSet.getDate(DATE));
                 service.setDescription(resultSet.getString(DESCRIPTION));
 
 
@@ -109,21 +122,27 @@ public class PostgreSQLService  {
 
     public void addService(Service service) {
 
-        final String sqlInsertService = "INSERT INTO service (id, value, description)" +
+        final String sqlInsertService = "INSERT INTO service (id, value, description,date)" +
                 "VALUES" +
-                "   (?,?, ?);";
+                "   (?,?, ?,?);";
         Connection connection = initializeDataBaseConnection();
         PreparedStatement preparedStatement = null;
 
         PostgreSQLService postgre = new PostgreSQLService();
 
         int id = postgre.getIdService()+1;
+
+
+        java.util.Date utilStartDate = service.getDate();
+        java.sql.Date sqlDate = new java.sql.Date(utilStartDate.getTime());
+
         try {
             preparedStatement = connection.prepareStatement(sqlInsertService);
 
             preparedStatement.setLong(1,id);
             preparedStatement.setDouble(2,service.getValue());
             preparedStatement.setString(3, service.getDescription());
+            preparedStatement.setDate(4, sqlDate);
 
             preparedStatement.executeUpdate();
 
@@ -154,6 +173,7 @@ public class PostgreSQLService  {
                 service.setId(resultSet.getLong(ID_SERVICE));
                 service.setValue(resultSet.getDouble(VALUE));
                 service.setDescription(resultSet.getString(DESCRIPTION));
+                service.setDate(resultSet.getTime(DATE));
 
                 return service;
 
@@ -175,18 +195,22 @@ public class PostgreSQLService  {
 //        SET ContactName='Alfred Schmidt', City='Frankfurt'
 //        WHERE CustomerID=1;
 
-        final String sqlInsertService =  "UPDATE service SET value=?, description=? WHERE id=?";
+        final String sqlInsertService =  "UPDATE service SET value=?, description=?, date=? WHERE id=?";
         Connection connection = initializeDataBaseConnection();
         PreparedStatement preparedStatement = null;
 
         PostgreSQLService postgre = new PostgreSQLService();
+        java.util.Date utilStartDate = service.getDate();
+        java.sql.Date sqlDate = new java.sql.Date(utilStartDate.getTime());
 
         try {
             preparedStatement = connection.prepareStatement(sqlInsertService);
 
             preparedStatement.setDouble(1,service.getValue());
             preparedStatement.setString(2, service.getDescription());
-            preparedStatement.setLong(3, service.getId());
+            preparedStatement.setDate(3, sqlDate);
+            preparedStatement.setLong(4, service.getId());
+
 
             preparedStatement.executeUpdate();
 
@@ -317,8 +341,7 @@ public class PostgreSQLService  {
 
                 other.setId(resultSet.getInt(ID_SERVICE));
                 other.setValue(resultSet.getDouble(VALUE));
-//                service.setData(resultSet.getDate(String.valueOf(date)));
-//                service.setData(resultSet.getDate());
+                other.setDate(resultSet.getDate(DATE));
                 other.setDescription(resultSet.getString(DESCRIPTION));
 
 
@@ -337,21 +360,25 @@ public class PostgreSQLService  {
 
     public void addOther(Other other) {
 
-        final String sqlInsertService = "INSERT INTO other (id, value, description)" +
+        final String sqlInsertService = "INSERT INTO other (id, value, description,date)" +
                 "VALUES" +
-                "   (?,?, ?);";
+                "   (?,?, ?,?);";
         Connection connection = initializeDataBaseConnection();
         PreparedStatement preparedStatement = null;
 
         PostgreSQLService postgre = new PostgreSQLService();
 
         int id = postgre.getIdOther()+1;
+        java.util.Date utilStartDate = other.getDate();
+        java.sql.Date sqlDate = new java.sql.Date(utilStartDate.getTime());
+
         try {
             preparedStatement = connection.prepareStatement(sqlInsertService);
 
             preparedStatement.setLong(1,id);
             preparedStatement.setDouble(2,other.getValue());
             preparedStatement.setString(3, other.getDescription());
+            preparedStatement.setDate(4, sqlDate);
 
             preparedStatement.executeUpdate();
 
@@ -382,6 +409,7 @@ public class PostgreSQLService  {
                 other.setId(resultSet.getLong(ID_SERVICE));
                 other.setValue(resultSet.getDouble(VALUE));
                 other.setDescription(resultSet.getString(DESCRIPTION));
+                other.setDate(resultSet.getTime(DATE));
 
                 return other;
 
@@ -398,22 +426,22 @@ public class PostgreSQLService  {
 
 
     public void saveEditOther(Other other){
-        //
-//        UPDATE Customers
-//        SET ContactName='Alfred Schmidt', City='Frankfurt'
-//        WHERE CustomerID=1;
-        final String sqlInsertService =  "UPDATE other SET value=?, description=? WHERE id=?";
+
+        final String sqlInsertService =  "UPDATE other SET value=?, description=?, date=? WHERE id=?";
         Connection connection = initializeDataBaseConnection();
         PreparedStatement preparedStatement = null;
 
         PostgreSQLService postgre = new PostgreSQLService();
+        java.util.Date utilStartDate = other.getDate();
+        java.sql.Date sqlDate = new java.sql.Date(utilStartDate.getTime());
 
         try {
             preparedStatement = connection.prepareStatement(sqlInsertService);
 
             preparedStatement.setDouble(1,other.getValue());
             preparedStatement.setString(2, other.getDescription());
-            preparedStatement.setLong(3, other.getId());
+            preparedStatement.setDate(3, sqlDate);
+            preparedStatement.setLong(4, other.getId());
 
             preparedStatement.executeUpdate();
 
@@ -486,6 +514,8 @@ public class PostgreSQLService  {
     public List<Parts> getAllParts() {
 
 
+
+
         final  String sqlSelectAllServices = "SELECT * FROM parts;";
 
         Connection connection = initializeDataBaseConnection();
@@ -504,6 +534,7 @@ public class PostgreSQLService  {
 
                 part.setId(resultSet.getInt(ID_SERVICE));
                 part.setValue(resultSet.getDouble(VALUE));
+                part.setDate(resultSet.getDate(DATE));
                 part.setDescription(resultSet.getString(DESCRIPTION));
 
 
@@ -522,21 +553,25 @@ public class PostgreSQLService  {
 
     public void addParts(Parts parts) {
 
-        final String sqlInsertService = "INSERT INTO parts (id, value, description)" +
+        final String sqlInsertService = "INSERT INTO parts (id, value, description,date)" +
                 "VALUES" +
-                "   (?,?, ?);";
+                "   (?,?, ?,?);";
         Connection connection = initializeDataBaseConnection();
         PreparedStatement preparedStatement = null;
 
         PostgreSQLService postgre = new PostgreSQLService();
 
         int id = postgre.getIdParts()+1;
+        java.util.Date utilStartDate = parts.getDate();
+        java.sql.Date sqlDate = new java.sql.Date(utilStartDate.getTime());
+
         try {
             preparedStatement = connection.prepareStatement(sqlInsertService);
 
             preparedStatement.setLong(1,id);
             preparedStatement.setDouble(2,parts.getValue());
             preparedStatement.setString(3, parts.getDescription());
+            preparedStatement.setDate(4, sqlDate);
 
             preparedStatement.executeUpdate();
 
@@ -566,6 +601,7 @@ public class PostgreSQLService  {
                 parts.setId(resultSet.getLong(ID_SERVICE));
                 parts.setValue(resultSet.getDouble(VALUE));
                 parts.setDescription(resultSet.getString(DESCRIPTION));
+                parts.setDate(resultSet.getTime(DATE));
 
                 return parts;
 
@@ -586,19 +622,22 @@ public class PostgreSQLService  {
 //        UPDATE Customers
 //        SET ContactName='Alfred Schmidt', City='Frankfurt'
 //        WHERE CustomerID=1;
-        final String sqlInsertService =  "UPDATE parts SET value=?, description=? WHERE id=?";
+        final String sqlInsertService =  "UPDATE parts SET value=?, description=?, date=? WHERE id=?";
 
         Connection connection = initializeDataBaseConnection();
         PreparedStatement preparedStatement = null;
 
         PostgreSQLService postgre = new PostgreSQLService();
+        java.util.Date utilStartDate = parts.getDate();
+        java.sql.Date sqlDate = new java.sql.Date(utilStartDate.getTime());
 
         try {
             preparedStatement = connection.prepareStatement(sqlInsertService);
 
             preparedStatement.setDouble(1,parts.getValue());
             preparedStatement.setString(2, parts.getDescription());
-            preparedStatement.setLong(3, parts.getId());
+            preparedStatement.setDate(3, sqlDate);
+            preparedStatement.setLong(4, parts.getId());
 
             preparedStatement.executeUpdate();
 
@@ -688,6 +727,7 @@ public class PostgreSQLService  {
 
                 petrolGas.setId(resultSet.getInt(ID_SERVICE));
                 petrolGas.setValue(resultSet.getDouble(VALUE));
+                petrolGas.setDate(resultSet.getDate(DATE));
                 petrolGas.setDescription(resultSet.getString(DESCRIPTION));
 
 
@@ -706,21 +746,26 @@ public class PostgreSQLService  {
 
     public void addPetrolGas(PetrolGas petrolGas) {
 
-        final String sqlInsertService = "INSERT INTO petrol (id, value, description)" +
+        final String sqlInsertService = "INSERT INTO petrol (id, value, description,date)" +
                 "VALUES" +
-                "   (?,?, ?);";
+                "   (?,?, ?,?);";
         Connection connection = initializeDataBaseConnection();
         PreparedStatement preparedStatement = null;
 
         PostgreSQLService postgre = new PostgreSQLService();
 
         int id = postgre.getIdPetrolGas()+1;
+        java.util.Date utilStartDate = petrolGas.getDate();
+        java.sql.Date sqlDate = new java.sql.Date(utilStartDate.getTime());
+
+
         try {
             preparedStatement = connection.prepareStatement(sqlInsertService);
 
             preparedStatement.setLong(1,id);
             preparedStatement.setDouble(2,petrolGas.getValue());
             preparedStatement.setString(3, petrolGas.getDescription());
+            preparedStatement.setDate(4, sqlDate);
 
             preparedStatement.executeUpdate();
 
@@ -750,6 +795,7 @@ public class PostgreSQLService  {
                 petrolGas.setId(resultSet.getLong(ID_SERVICE));
                 petrolGas.setValue(resultSet.getDouble(VALUE));
                 petrolGas.setDescription(resultSet.getString(DESCRIPTION));
+                petrolGas.setDate(resultSet.getTime(DATE));
 
                 return petrolGas;
 
@@ -771,18 +817,21 @@ public class PostgreSQLService  {
 //        SET ContactName='Alfred Schmidt', City='Frankfurt'
 //        WHERE CustomerID=1;
 //        long a = petrolGas.getId();
-        final String sqlInsertService = "UPDATE petrol SET value=?, description=? WHERE id=?";
+        final String sqlInsertService = "UPDATE petrol SET value=?, description=?, date=? WHERE id=?";
         Connection connection = initializeDataBaseConnection();
         PreparedStatement preparedStatement = null;
 
         PostgreSQLService postgre = new PostgreSQLService();
+        java.util.Date utilStartDate = petrolGas.getDate();
+        java.sql.Date sqlDate = new java.sql.Date(utilStartDate.getTime());
 
         try {
             preparedStatement = connection.prepareStatement(sqlInsertService);
 
             preparedStatement.setDouble(1,petrolGas.getValue());
             preparedStatement.setString(2, petrolGas.getDescription());
-            preparedStatement.setLong(3,petrolGas.getId());
+            preparedStatement.setDate(3, sqlDate);
+            preparedStatement.setLong(4,petrolGas.getId());
 
             preparedStatement.executeUpdate();
 
