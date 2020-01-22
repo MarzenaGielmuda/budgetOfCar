@@ -562,6 +562,7 @@ public class PostgreSQLService  {
         PostgreSQLService postgre = new PostgreSQLService();
 
         int id = postgre.getIdParts()+1;
+
         java.util.Date utilStartDate = parts.getDate();
         java.sql.Date sqlDate = new java.sql.Date(utilStartDate.getTime());
 
