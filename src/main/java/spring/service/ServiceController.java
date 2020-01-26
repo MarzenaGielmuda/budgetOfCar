@@ -7,6 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 import spring.postgres.PostgreSQLService;
 
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,6 +52,22 @@ public class ServiceController {
     @RequestMapping("/totalBudget")
     public ModelAndView totalBudget(Model model) {
         ModelAndView modelAndView = new ModelAndView();
+
+//            List<Service> servicesList = new ArrayList<>();
+//            Service service1 = new Service(1, 250, "wymiana kół", new java.util.Date());
+//            Service service2 = new Service(2, 150, "polerowanie reflektorów", new java.util.Date());
+//            Service service3 = new Service(3, 120, "wymiana oleju w skrzyni biegów", new java.util.Date());
+//            servicesList.add(service1);
+//            servicesList.add(service2);
+//            servicesList.add(service3);
+
+
+
+//        try {
+//            listService = postgresServiceStorage.getAllServices();
+//        }catch (IOException e){
+//            return servicesList;
+//        }
 
         listService = postgresServiceStorage.getAllServices();
         listOther = postgresServiceStorage.getAllOther();

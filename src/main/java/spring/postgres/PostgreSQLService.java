@@ -5,8 +5,11 @@ import spring.type.Other;
 import spring.type.Parts;
 import spring.type.PetrolGas;
 import spring.type.Service;
+import sun.util.calendar.BaseCalendar;
+import sun.util.calendar.LocalGregorianCalendar;
 
 import java.sql.*;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,9 +38,18 @@ public class PostgreSQLService  {
     private final String DESCRIPTION = "description";
     private final String LastID = "LastID";
 
-    List<Service> servicesList = new ArrayList<>();
-    Service service1 = new Service();
 
+//    public List<Service> ListService() {
+//        List<Service> servicesList = new ArrayList<>();
+//        Service service1 = new Service(1, 250, "wymiana kół", new java.util.Date());
+//        Service service2 = new Service(2, 150, "polerowanie reflektorów", new java.util.Date());
+//        Service service3 = new Service(3, 120, "wymiana oleju w skrzyni biegów", new java.util.Date());
+//        servicesList.add(service1);
+//        servicesList.add(service2);
+//        servicesList.add(service3);
+//        return servicesList;
+//    }
+//
     List<Parts> partsList = new ArrayList<>();
 
     List<Other> othersList = new ArrayList<>();
@@ -72,7 +84,7 @@ public class PostgreSQLService  {
 
 
     public List<Service> getAllServices() {
-
+        PostgreSQLService postgreSQLService= new PostgreSQLService();
 
         final  String sqlSelectAllServices = "SELECT * FROM service;";
 
@@ -113,6 +125,8 @@ public class PostgreSQLService  {
 
             System.err.println("Error during invoke SQL query: \n" + e.getMessage());
             throw new  RuntimeException("Error during invoke SQL query");
+
+
         }
         finally {
             closeDataBaseResources(connection,statement);
